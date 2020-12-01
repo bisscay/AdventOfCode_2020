@@ -1,7 +1,12 @@
 # AdventOfCode_2020
-Coding challenges to help Santa save Christmas
+Coding challenges to help ~~Santa save Christmas~~.
 
-The first puzzles will unlock on December 1st at midnight EST (UTC-5).
+Okay we're going on vacation this time, but we need gold for a room.
 
 Join the adventure at:
 https://adventofcode.com/
+
+Task | Solution 
+--- | --- 
+[Day1](https://adventofcode.com/2020/day/1) | [ReportRepair]() 
+Day2 | ... 
