@@ -60,6 +60,21 @@ public class ReportRepair {
         for(Map.Entry entry : map.entrySet()) { // O(n)
             map.put((Integer)entry.getKey(),2020 - (Integer)entry.getKey());//O(1)
         }
+        // list of values that can add up to 2020
+        List<Integer> list = new ArrayList<>(map.values());
+        
+        // if any two keys add up to a value in list,
+        // and neither key maps to the value,
+        // multiply both keys and the key that maps to the value
+        int difference, key;
+        for(Integer query : list) {
+            for(Map.Entry entry : map.entrySet()) {
+                key = (Integer)entry.getKey();
+                difference = query - key;
+                if(map.containsKey(difference))
+                    return difference * key * (2020-query);
+            }
+        }
         return 0;
     }
     
@@ -77,7 +92,7 @@ public class ReportRepair {
             }
             // debug
             System.out.println("Part One: " +repair(map));
-            //System.out.println("Morph: " +threeSum(map));
+            System.out.println("Part Two: " +threeSum(map));
         } catch(FileNotFoundException e) {
             // uncaught exceptions
             System.out.println(e.getClass().getName() + " :" + e.getMessage());
