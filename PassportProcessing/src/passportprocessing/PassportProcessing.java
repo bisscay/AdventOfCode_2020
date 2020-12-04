@@ -25,16 +25,17 @@ public class PassportProcessing {
         int valid = 0;
         // split at blank line
         String[] inputArray = input.trim().split("\\n\\s+");
-        // split at space or newline for each passenger's credentials
+        
         int inputSize = inputArray.length;
 
-        // hold each passengers credential
+        // holds each passengers credential -
+        // split at space or newline for each passenger's credentials
         String[] credential;
         // hold each credentials key
         HashSet<String> set = new HashSet<>();
 
         for (int i = 0; i < inputSize; ++i) {
-            // store split values in an array
+            // store split values in array
             credential = inputArray[i].split("[\\s+ | \\n]");
             // place values in a hashset - no two credential keys are equal
             // access just keys, values not needed
