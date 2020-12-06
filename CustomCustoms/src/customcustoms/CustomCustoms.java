@@ -18,11 +18,11 @@ public class CustomCustoms {
     // apppend input lines to a string until a blank line is found
     // place each character in a hashset for uniqueness
     // -------------------------------
-    // Part 2; Option 1; O(n x m)
+    // Part 2; O(n x m)
     
 
     /**
-     * Total Unique Yes Per Group
+     * Total Unique 'Yes' Per Group
      * @param input
      * @return 
      */
@@ -44,6 +44,7 @@ public class CustomCustoms {
             temp.add(Arrays.asList(individual[i].split("")));
             
             }
+            // place each character in a hashset for uniqueness
             for(List<String> s : temp) {
                 for(String x : s) {
                     set.add(x);
@@ -76,7 +77,7 @@ public class CustomCustoms {
     }
     
     /**
-     * Common Yes per Group
+     * Common 'Yes' per Group
      * @param input - String
      * @return sum of common yes per group - int
      */
