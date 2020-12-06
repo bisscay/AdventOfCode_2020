@@ -13,3 +13,4 @@ Task | Solution
 [Day 3](https://adventofcode.com/2020/day/3) | [TobogganTrajectory](https://github.com/bisscay/AdventOfCode_2020/blob/main/TobogganTrajectory/src/toboggantrajectory/TobogganTrajectory.java)
 [Day 4](https://adventofcode.com/2020/day/4) | [PassportProcessing](https://github.com/bisscay/AdventOfCode_2020/blob/main/PassportProcessing/src/passportprocessing/PassportProcessing.java)
 [Day 5](https://adventofcode.com/2020/day/5) | [BinaryBoarding](https://github.com/bisscay/AdventOfCode_2020/blob/main/BinaryBoarding/src/binaryboarding/BinaryBoarding.java)
+[Day 6](https://adventofcode.com/2020/day/6) | [CustomCustoms](https://github.com/bisscay/AdventOfCode_2020/blob/main/CustomCustoms/src/customcustoms/CustomCustoms.java)
