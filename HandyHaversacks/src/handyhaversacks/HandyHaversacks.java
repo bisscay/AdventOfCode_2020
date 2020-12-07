@@ -30,7 +30,17 @@ class Node{
         next = null;
     }
     Node(int count, String color, Node[] next) {
-        
+        this.count = count;
+        this.color = color;
+        this.next = new ArrayList<>(Arrays.asList(next));
+    }
+
+    @Override
+    public String toString() {
+        if(next != null)
+            return "Parent: " +color +" " +count +"\nChildren: " +next;
+        else
+            return "Parent: " +color +" " +count +"\nNo Children";
     }
 }
 public class HandyHaversacks {
@@ -50,8 +60,13 @@ public class HandyHaversacks {
     public static void main(String[] args) {
         // TODO code application logic here
         try(Scanner scanner = new Scanner(new File("../PuzzleInput/test.txt"))) {
-            String input, key, value;
-            int keyEnd, valueStart, valueEnd;
+            String input, key, value, bag, colorData;
+            int keyEnd, valueStart, valueEnd, childCount, countEnd, colorEnd;
+            // child param
+            int countData = 0;
+            Node child;
+            // forest declaration
+            Node forest;
             String[] valueArray;
             HashMap<String, String> map = new HashMap<>();
             while(scanner.hasNext()) {
@@ -70,9 +85,35 @@ public class HandyHaversacks {
                 map.put(key, value);
                 // split values at comma
                 valueArray = value.split(", ");
-                
+                // derive children data
+                childCount = valueArray.length;
+                Node[] children = new Node[childCount];
+                for(int i = 0; i < childCount; ++i) {
+                    bag = valueArray[i];
+                    // account for leaf nodes
+                    if(bag.charAt(0) != 'n') {
+                        countEnd = bag.indexOf(" ");
+                        countData = Integer.valueOf(bag.substring(0, countEnd));
+                        colorEnd = bag.indexOf(" bag");
+                        colorData = bag.substring(countEnd+1, colorEnd);
+                        // create child node
+                        child = new Node(countData,colorData);
+                        children[i] = child;
+                        System.out.println(countData +" " +colorData);
+                    } else {
+                        countData = 0; // could use coloData
+                    }
+                }
+                // create a forest
+                if(countData != 0) {
+                    forest = new Node(0,key,children);
+                } else { // a leaf
+                    forest = new Node(0,key);
+                }
+                System.out.println(forest);
+                //debug
                 System.out.println(key);
-                for(String s : valueArray) System.out.println(s);
+                //for(String s : valueArray) System.out.println(s);
                 System.out.println("------");
             }
             goldBagContainerCount(map);
