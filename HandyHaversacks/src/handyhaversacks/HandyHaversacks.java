@@ -7,9 +7,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 /**
- *
+ * Lol, Damn 
  * @author bAe
  */
+// for each set, check if the value string contains shiny gold
+// if it does, add that key to bag set
+// for every bag in set, check if map value string contains a bag,
+// if it does, add that bag to set
+// ??? stopping condition ???? Use trees
+// ---------------------------------
 // build single depth forests for each input line
 // add forests to a list
 // keep map of forest color -
@@ -20,21 +26,33 @@ import java.io.FileNotFoundException;
 // on each next modification, increament child counts based on corresponding forest
 // make a set of every parent of shiny gold bags
 // return size of set
+
 class Node{
     int count;
     String color;
     ArrayList<Node> next;
+    
     Node(int count, String color) {
         this.count = count;
         this.color = color;
         next = null;
     }
+    
     Node(int count, String color, Node[] next) {
         this.count = count;
         this.color = color;
         this.next = new ArrayList<>(Arrays.asList(next));
     }
-
+    
+    public static Node insert(Node root, Node child) {
+        for(Node node : root.next) { 
+            if(child.color.equals(node.color)) {
+                node.next = child.next;
+            }
+        }
+        return root;
+    }
+             
     @Override
     public String toString() {
         if(next != null)
@@ -44,14 +62,67 @@ class Node{
     }
 }
 public class HandyHaversacks {
-    //// for each set, check is the value string contains shiny gold
-        // if it does, add that key to bag set
-        // for every bag in set, check if map value string contains a bag,
-        // if it does, add that bag to set
-        // ??? stopping condition ???? Use trees
-    public static int goldBagContainerCount(HashMap<String, String> map) {
         
+    /**
+     * Option 2
+     * @param forestList
+     * @param map
+     * @return 
+     */
+    private static int goldBagContainerCount(List<Node> forestList,HashMap<String, Integer> map) {
+        // make a tree
+        HashSet<Node> tree = new HashSet<>();
+        String query = "";
+        // pick the lowest map value(s) i.e value == 0
+        for(Map.Entry entry : map.entrySet()) {
+            if((Integer)entry.getValue() == 0) query = (String)entry.getKey();
+            for(Node node : forestList) {
+                if(query == null ? (node.color) == null : query.equals(node.color)) tree.add(node);
+            }
+        }
+        // extend the forest with low map value by setting it's children to corresponding forests
+        for(Node root : tree) {
+            for(Node child : forestList) {
+                if(!root.equals(child)) { // exclude comparism with root instance in map
+                    root = Node.insert(root,child);
+                }
+            }
+        }
         return 0;
+    }
+    
+    /**
+     * Option 1
+     * @param forestList
+     * @return 
+     */
+    private static int getParent(List<Node> forestList) {
+        HashSet<String> set = new HashSet<>();
+        HashSet<String> set2 = new HashSet<>();
+        // for each set, check if the value string contains shiny gold
+        for (Node forestNode : forestList) {
+            for (Node node : forestNode.next) {
+                // if it does, add that key to bag set
+                if (node != null && node.color.equals("shiny gold")) {
+                    set.add(forestNode.color);
+                }
+            }
+        }
+        // for every bag in set, check if map value string contains a bag,
+        for(String bag : set){
+            for (Node forestNode : forestList) {
+                for (Node node : forestNode.next) { 
+                    if(node != null){ 
+                        if(set.contains(node.color)) 
+                            //System.out.println(forestNode.color);
+                            set2.add(forestNode.color);
+                    }
+                }
+            }
+        } 
+        System.out.println(set);
+        System.out.println(set2);
+        return set.size() + set2.size();
     }
 
     /**
@@ -107,7 +178,7 @@ public class HandyHaversacks {
                         if(!map.containsKey(colorData)) map.put(colorData, 1);
                         else map.put(colorData,map.get(colorData) + 1);
                     } else {
-                        countData = 0; // could use colorData
+                        countData = -1; // leaf node marker
                     }
                 }
                 // create a forest
@@ -118,15 +189,10 @@ public class HandyHaversacks {
                 }
                 // add forests to list
                 forestList.add(forest);
-                
-//                //debug
-                System.out.println(key);
-//                //for(String s : valueArray) System.out.println(s);
-//                System.out.println("------");
             }
+            
             // debug
-            System.out.println(map);
-            //System.out.println(forestList);
+            System.out.println(getParent(forestList));
         } catch(FileNotFoundException e) {
             System.out.println(e.getClass().getName() +" : " +e.getMessage());
         } catch(Exception e) {
