@@ -67,8 +67,10 @@ public class HandyHaversacks {
             Node child;
             // forest declaration
             Node forest;
+            List<Node> forestList = new ArrayList<>();
             String[] valueArray;
-            HashMap<String, String> map = new HashMap<>();
+            // keep map of forest color -
+            HashMap<String, Integer> map = new HashMap<>();
             while(scanner.hasNext()) {
                 input = scanner.nextLine();
                 // get first occurance of bags,
@@ -81,8 +83,10 @@ public class HandyHaversacks {
                 valueEnd = input.length() - 1; // ignore fullstop
                 // store value
                 value = input.substring(valueStart, valueEnd);
-                // place in map
-                map.put(key, value);
+                
+                // when a color is a key, map value will be increamented by 0
+                if(!map.containsKey(key)) map.put(key, 0);
+                
                 // split values at comma
                 valueArray = value.split(", ");
                 // derive children data
@@ -99,9 +103,11 @@ public class HandyHaversacks {
                         // create child node
                         child = new Node(countData,colorData);
                         children[i] = child;
-                        System.out.println(countData +" " +colorData);
+                        // when a color is in the value array, map value will be increased by 1
+                        if(!map.containsKey(colorData)) map.put(colorData, 1);
+                        else map.put(colorData,map.get(colorData) + 1);
                     } else {
-                        countData = 0; // could use coloData
+                        countData = 0; // could use colorData
                     }
                 }
                 // create a forest
@@ -110,14 +116,17 @@ public class HandyHaversacks {
                 } else { // a leaf
                     forest = new Node(0,key);
                 }
-                System.out.println(forest);
-                //debug
+                // add forests to list
+                forestList.add(forest);
+                
+//                //debug
                 System.out.println(key);
-                //for(String s : valueArray) System.out.println(s);
-                System.out.println("------");
+//                //for(String s : valueArray) System.out.println(s);
+//                System.out.println("------");
             }
-            goldBagContainerCount(map);
-            //System.out.println(map);
+            // debug
+            System.out.println(map);
+            //System.out.println(forestList);
         } catch(FileNotFoundException e) {
             System.out.println(e.getClass().getName() +" : " +e.getMessage());
         } catch(Exception e) {
