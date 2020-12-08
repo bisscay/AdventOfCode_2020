@@ -18,11 +18,12 @@ import java.io.FileNotFoundException;
 // once an instruction is revisited, 
 // the accumulator is displayed
 // -------------------------------------------------
-// Part 2 - O
+// Part 2 - O(n x m)
 // continue until the set size equals the list size
 // when u see a nop, make it a jump and vice versa
-// compute and see if set size equals list size
+// compute and see if step equals list size
 // if not, swap the next nop or jump encountered
+
 class BootCode {
     private String instruction;
     private int action;
@@ -33,7 +34,7 @@ class BootCode {
         this.action = action;
     }
     
-    // Getters & Setters - Notice setAccumulator increament
+    // Getters & Setters - Notice calAccumulator increament
     public String getInstruction() {
         return instruction;
     }
@@ -55,6 +56,10 @@ class BootCode {
     }
 
     public static void setAccumulator(int accumulator) {
+        BootCode.accumulator = accumulator;
+    }
+    
+    public static void calcAccumulator(int accumulator) {
         BootCode.accumulator += accumulator;
     }
 
@@ -80,7 +85,8 @@ class BootCode {
 //        // return true if properties are equal
 //        return(this.action == other.action && this.instruction.equals(other.instruction));
     }
-
+    
+    // hash paramount for hash set
     @Override
     public int hashCode() {
         int hash = 7;
@@ -90,34 +96,101 @@ class BootCode {
     }
 }
 public class HandheldHalting {
-    //
+    
+    /**
+     * Get initial accumulation and resolved accumulation
+     * @param codeList - ArrayList<BootCode>
+     * @return Part 1 (Commented) and Part 2 Prerequisit - int
+     */
     private static int getAccumulation(ArrayList<BootCode> codeList) {
         HashSet<BootCode> set = new HashSet<>();
         // start from first operation
         int step = 0;
+        // start from first operation
+        //int step = 0;
         int listSize = codeList.size();
         BootCode line = codeList.get(step);
         // move until end of list or bootcode is encountered again
         while(!set.contains(line) && step < listSize) {
             set.add(line);
             if (line.getInstruction().equals("acc")) {
-                BootCode.setAccumulator(line.getAction());
+                BootCode.calcAccumulator(line.getAction());
                 // move to next line
-                line = codeList.get(step+1);
+                // unless at end
+                if((step+1) == listSize)
+                    return step;
+                else    line = codeList.get(step+1);
             } else if (line.getInstruction().equals("jmp")) {
                 // jump to new location
-                line = codeList.get(step+line.getAction());
+                // unless at end
+                if((step+1) == listSize)
+                    return step;
+                else
+                    line = codeList.get(step+line.getAction());
             } else {
                 // no operation, move to next line
-                line = codeList.get(step+1);
+                // unless at end
+                if((step+1) == listSize)
+                    return step;
+                else
+                    line = codeList.get(step+1);
             }
             // use current list location as reference point
             step = codeList.indexOf(line);
         }
-        return BootCode.getAccumulator();
+        // Uncomment this for Part 1 solution
+        //return BootCode.getAccumulator(); 
+        
+        // Part 2 solution
+        return step; 
     }
     
-    /**Driver code
+    /**
+     * Get resolved boot loader instruction
+     * @param codeList - ArrayList<BootCode>
+     * @return  result - int
+     */
+    private static int resolvedCode(ArrayList<BootCode> codeList) {
+        // when u see a nop, make it a jump and vice versa
+        ListIterator lit = codeList.listIterator();
+        int result;
+        BootCode line;
+        String instruction;
+        while(lit.hasNext()) {
+            line = (BootCode)lit.next();
+            instruction = line.getInstruction();
+            // avoid chechking for acc commands
+            if(instruction.equals("nop") || instruction.equals("jmp")) {
+                // swap nop for jump and vice versa
+                if(instruction.equals("nop")) {
+                    line.setInstruction("jmp");
+                } else if(instruction.equals("jmp")) {
+                    line.setInstruction("nop");
+                }
+                // get accumulation
+                result = getAccumulation(codeList); // O(n)
+                
+                // reset code list to default
+                instruction = line.getInstruction();
+                if(instruction.equals("nop")) {
+                    line.setInstruction("jmp");
+                } else if(instruction.equals("jmp")) {
+                    line.setInstruction("nop");
+                }
+
+                // see if step before last equals list size
+                if(result+1 == codeList.size()) 
+                    return BootCode.getAccumulator();
+                
+                // reset accumulator
+                BootCode.setAccumulator(0);
+            }
+        }
+        return 0;
+    }
+    
+    /**
+     * Driver code
      * @param args the command line arguments
      */
     public static void main(String[] args) {
@@ -140,7 +213,9 @@ public class HandheldHalting {
             } 
 
             accumulation = getAccumulation(codeList);
-            System.out.println("Part 1: " +accumulation);
+//            System.out.println("Part 1: " +accumulation);
+            System.out.println("For Part 1; uncomment return statement in 'getAccumulation' method.");
+            System.out.println("Part 2: " +resolvedCode(codeList));
         } catch(FileNotFoundException e) {
             System.out.println(e.getClass().getName() +" : " +e.getMessage());
         } catch(Exception e) {
