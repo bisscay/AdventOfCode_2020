@@ -96,9 +96,21 @@ public class HandyHaversacks {
      * @param forestList
      * @return 
      */
-    private static int getParent(List<Node> forestList) {
+    private static int getParent(List<Node> forestList,HashMap<String, Integer> map) {
+        // hold the roots
+        HashSet<Node> tree = new HashSet<>();
+        String query = "";
+        // pick the lowest map value(s) i.e value == 0
+        for(Map.Entry entry : map.entrySet()) {
+            if((Integer)entry.getValue() == 0) query = (String)entry.getKey();
+            for(Node node : forestList) {
+                if(query == null ? (node.color) == null : query.equals(node.color)) tree.add(node);
+            }
+        }
+        
         HashSet<String> set = new HashSet<>();
         HashSet<String> set2 = new HashSet<>();
+        HashSet<String> setSum = new HashSet<>();
         // for each set, check if the value string contains shiny gold
         for (Node forestNode : forestList) {
             for (Node node : forestNode.next) {
@@ -109,20 +121,37 @@ public class HandyHaversacks {
             }
         }
         // for every bag in set, check if map value string contains a bag,
-        for(String bag : set){
-            for (Node forestNode : forestList) {
-                for (Node node : forestNode.next) { 
-                    if(node != null){ 
-                        if(set.contains(node.color)) 
-                            //System.out.println(forestNode.color);
-                            set2.add(forestNode.color);
-                    }
+        for (Node forestNode : forestList) {
+            for (Node node : forestNode.next) { 
+                if(node != null && set.contains(node.color)){
+                        set2.add(forestNode.color);
                 }
             }
-        } 
+        }
+        for(String s : set) {
+            setSum.add(s);
+        }
+        for(String s : set2) {
+            setSum.add(s);
+        }
+        
+//        for (Node root : tree) {
+//            // if set does not contain  root
+//            while (!setSum.contains(root.color)) {
+//                for (Node forestNode : forestList) {
+//                    for (Node node : forestNode.next) {
+//                        if (node != null && setSum.contains(node.color)) {
+//                            setSum.add(forestNode.color);
+//                        }
+//                    }
+//                }
+//            }
+//        }
         System.out.println(set);
         System.out.println(set2);
-        return set.size() + set2.size();
+        for (Node root : tree)
+        System.out.println(root.color);
+        return setSum.size();
     }
 
     /**
@@ -130,7 +159,7 @@ public class HandyHaversacks {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        try(Scanner scanner = new Scanner(new File("../PuzzleInput/test.txt"))) {
+        try(Scanner scanner = new Scanner(new File("../PuzzleInput/input_7.txt"))) {
             String input, key, value, bag, colorData;
             int keyEnd, valueStart, valueEnd, childCount, countEnd, colorEnd;
             // child param
@@ -192,7 +221,7 @@ public class HandyHaversacks {
             }
             
             // debug
-            System.out.println(getParent(forestList));
+            System.out.println(getParent(forestList,map));
         } catch(FileNotFoundException e) {
             System.out.println(e.getClass().getName() +" : " +e.getMessage());
         } catch(Exception e) {
