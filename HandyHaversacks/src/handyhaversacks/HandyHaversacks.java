@@ -62,6 +62,25 @@ class Node{
     }
 }
 public class HandyHaversacks {
+    //
+    private static Node getGoldDad(Node dad) {
+        HashSet<Node> set = new HashSet<>();
+        if(dad.next.contains(new Node(0, "shiny gold"))) {
+            set.add(dad);
+            return dad;
+        }
+        else if (dad.next != null) {
+            // return the dad's child
+            //return dad.next;
+//            // find a forest where it's child is a root
+//            for(Node forest : forestList) {
+//                if(dad.next.contains(forest))
+//                    set.add(getGoldDad(forest));
+//            }
+
+        }
+        return null;    
+    } 
         
     /**
      * Option 2
@@ -120,20 +139,29 @@ public class HandyHaversacks {
                 }
             }
         }
+        // find every node that has shiny gold as a child
+        // find every node that has that parent as a child
+        // continue until the parent is a root
+        
         // for every bag in set, check if map value string contains a bag,
-        for (Node forestNode : forestList) {
-            for (Node node : forestNode.next) { 
-                if(node != null && set.contains(node.color)){
-                        set2.add(forestNode.color);
+        //for (Node root : tree) {
+            // if set does not contain  root
+            //while (!setSum.contains(root.color)) {
+                for (Node forestNode : forestList) {
+                    for (Node node : forestNode.next) { 
+                        if(node != null && set.contains(node.color)){
+                                set2.add(forestNode.color);
+                        }
+                    }
                 }
-            }
-        }
-        for(String s : set) {
-            setSum.add(s);
-        }
-        for(String s : set2) {
-            setSum.add(s);
-        }
+                for(String s : set) {
+                    setSum.add(s);
+                }
+                for(String s : set2) {
+                    setSum.add(s);
+                }
+            //}
+        //}
         
 //        for (Node root : tree) {
 //            // if set does not contain  root
@@ -147,8 +175,8 @@ public class HandyHaversacks {
 //                }
 //            }
 //        }
-        System.out.println(set);
-        System.out.println(set2);
+//        System.out.println(set);
+//        System.out.println(set2);
         for (Node root : tree)
         System.out.println(root.color);
         return setSum.size();
