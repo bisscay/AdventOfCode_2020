@@ -14,3 +14,5 @@ Task | Solution
 [Day 4](https://adventofcode.com/2020/day/4) | [PassportProcessing](https://github.com/bisscay/AdventOfCode_2020/blob/main/PassportProcessing/src/passportprocessing/PassportProcessing.java)
 [Day 5](https://adventofcode.com/2020/day/5) | [BinaryBoarding](https://github.com/bisscay/AdventOfCode_2020/blob/main/BinaryBoarding/src/binaryboarding/BinaryBoarding.java)
 [Day 6](https://adventofcode.com/2020/day/6) | [CustomCustoms](https://github.com/bisscay/AdventOfCode_2020/blob/main/CustomCustoms/src/customcustoms/CustomCustoms.java)
+[Day 7](https://adventofcode.com/2020/day/7) | . . .
+[Day 8](https://adventofcode.com/2020/day/8) | [HandheldHalting](https://github.com/bisscay/AdventOfCode_2020/blob/main/HandheldHalting/src/handheldhalting/HandheldHalting.java)
