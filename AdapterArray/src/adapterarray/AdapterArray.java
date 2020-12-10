@@ -11,22 +11,13 @@ import java.io.FileNotFoundException;
  * @author bAe
  */
 public class AdapterArray {
-    // Pseudocode
-    // Part 1, Option 1 - O(nlogn)
-    // read stream as list of integers
-    // sort list - O(nlogn)
-    // declear variables for one and three count
-    // if the difference between first and next is one, - O(n)
-    // increament one
-    // if the difference is three, increament three
-    // ---------------------------------------------------
-    // Part 1, Option 2 - O(n)
-    // find minimum and max in set - O(n)
+    // Pseudocode - O(n)
+    // find minimum and max in set
     // increase minimum by 1 or 2 or 3 until maximum
     // keep count for 1 and 3
     // when at maximum, return product of 1 and 3 count
     // ---------------------------------------------------
-    // Part 2
+    // Part 2, 
     
     /**
      * Get product of jolt 1 and 3 counts; Option 2
