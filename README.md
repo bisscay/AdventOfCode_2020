@@ -16,3 +16,4 @@ Task | Solution
 [Day 6](https://adventofcode.com/2020/day/6) | [CustomCustoms](https://github.com/bisscay/AdventOfCode_2020/blob/main/CustomCustoms/src/customcustoms/CustomCustoms.java)
 [Day 7](https://adventofcode.com/2020/day/7) | . . .
 [Day 8](https://adventofcode.com/2020/day/8) | [HandheldHalting](https://github.com/bisscay/AdventOfCode_2020/blob/main/HandheldHalting/src/handheldhalting/HandheldHalting.java)
+[Day 9](https://adventofcode.com/2020/day/9) | [EncodingError](https://github.com/bisscay/AdventOfCode_2020/blob/main/EncodingError/src/encodingerror/EncodingError.java)
