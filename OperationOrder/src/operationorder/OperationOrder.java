@@ -21,6 +21,8 @@ public class OperationOrder {
     // take out recently resolved nested parenthesis
     // stop when all brackets are resolved
     // -------------------------------
+    // place parenthensis round values with *
+    // call Part 1
     
     /**
      * Get sum of expressions following defined rules
@@ -69,6 +71,12 @@ public class OperationOrder {
         }
         return result;
     }
+    
+    // loop through input string characters
+    // when charcater == *
+    // get char before and after *
+    // replace expression with parenthesis in string
+    
 
     /**
      * @param args the command line arguments
