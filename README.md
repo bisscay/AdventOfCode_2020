@@ -18,3 +18,4 @@ Task | Solution
 [Day 8](https://adventofcode.com/2020/day/8) | [HandheldHalting](https://github.com/bisscay/AdventOfCode_2020/blob/main/HandheldHalting/src/handheldhalting/HandheldHalting.java)
 [Day 9](https://adventofcode.com/2020/day/9) | [EncodingError](https://github.com/bisscay/AdventOfCode_2020/blob/main/EncodingError/src/encodingerror/EncodingError.java)
 [Day 10](https://adventofcode.com/2020/day/10) | [AdapterArray](https://github.com/bisscay/AdventOfCode_2020/blob/main/AdapterArray/src/adapterarray/AdapterArray.java)
+[Day 14](https://adventofcode.com/2020/day/14) | [DockingData](https://github.com/bisscay/AdventOfCode_2020/blob/main/DockingData/src/dockingdata/DockingData.java)
