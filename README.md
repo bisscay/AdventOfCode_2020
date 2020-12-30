@@ -22,4 +22,5 @@ Task | Solution
 [Day 18](https://adventofcode.com/2020/day/18) | [OperationOrder](https://github.com/bisscay/AdventOfCode_2020/blob/main/OperationOrder/src/operationorder/OperationOrder.java)
 
 This was fun, learnt alot from these challenges.
+
 I'll visit the remaining tasks later, sharpening my JavaEE skills.
